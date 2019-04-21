@@ -1,0 +1,29 @@
+﻿@using WebApplication1.Models;
+@{
+    ViewBag.Title = "order";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<h2>My Cart</h2>
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Quantity</th>
+        <th>Sub Total</th>
+    </tr>
+    @foreach (var cart in (List<MyCart>)Session["CART"])
+    {
+        <tr>
+            <td>@cart.Product.ProductName</td>
+            <td>@cart.Product.ProductPrice</td>
+            <td>@cart.Product.ProductDescription</td>
+            <td>@cart.Quantity</td>
+            <td>(@string.Format("{0:N0}", cart.Product.ProductPrice * cart.Quantity))</td>
+            @*<td>
+                 @Html.ActionLink("Delete", "DeleteOrder", "User", new { id= MyCart.Product.ProductID},null)
+                </td>*@
+        </tr>
+    }
+</table>
