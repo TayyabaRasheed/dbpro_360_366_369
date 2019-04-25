@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "checkout";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+
+@{
+    ViewBag.Title = "checkout";
+}
+
+<h2>checkout</h2>
+
+@if (TempData["MyCart"] != null)
+{
+
+
+    <table class="table table-responsive">
+
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>PRICE</th>
+                <th>QUANTITY</th>
+                <th>BILL</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in TempData["MyCart"] as List<WebApplication1.Models.MyCart>)
+            {
+
+                <tr>
+                    <td>@item.productid</td>
+                    <td>@item.productname</td>
+                    <td>@item.price</td>
+                    <td>@item.qty</td>
+                    <td>@item.bill</td>
+
+                </tr>
+
+            }
+
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td colspan="4"></td>
+                <td>@TempData["total"]</td>
+
+            </tr>
+        </tfoot>
+
+    </table>
+
+
+
+
+
+}
+else
+{
+    <h2 style="color:red"> Cart is empty....</h2>
+    @Html.ActionLink("go Back", "Index", "User")
+}
+
+@if (TempData["MyCart"] != null)
+{
+
+    using (Html.BeginForm())
+        {
+            <input type="submit" value="Shop now" class="btn btn-primary"/>
+        }
+    }
+
+
+

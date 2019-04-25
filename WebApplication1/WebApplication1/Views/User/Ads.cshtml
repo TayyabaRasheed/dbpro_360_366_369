@@ -1,0 +1,162 @@
+﻿@using PagedList.Mvc
+@model  PagedList.IPagedList<WebApplication1.Models.Product>
+
+@{
+    ViewBag.Title = "Ads";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+
+<style>
+    .cimg {
+        -webkit-transform 5s;
+        transition: transform 5s;
+    }
+
+        .cimg:hover {
+            -webkit-transform: rotatez(360deg);
+        }
+</style>
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>View  Category</title>
+    <link href="~/Content/paginition.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+
+
+    @if (TempData["msg"] != null)
+    {
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Success!</strong> @TempData["msg"]
+        </div>
+    }
+
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <div class="row">
+        <div class="col-lg-10 col-md-10 col-sm-10">
+            @if (TempData["total"] == null)
+            {
+
+                <h3>
+                    Total Bill: 0 Rs
+                </h3>
+            }
+            else
+            {
+                <h3> Total Bill: @TempData["total"] Rs</h3>
+
+            }
+
+        </div>
+
+
+        <div class="col-lg-2 col-md-2 col-sm-2">
+            <h3 style="color:#808080; font-family:'Arial Rounded MT';text-align:center"> <span class="btn btn-info">@Html.ActionLink("Check Out", "checkout", "User")</span></h3>
+        </div>
+
+
+
+
+    </div>
+
+
+
+
+    <div style="height:1150px; ">
+        <div class="row">
+            <div class="col-lg-12" style="height:100px; border:1px solid solid; ">
+
+
+                <img src="~/Content/img/Modern-e-Commerce-Web-Design-Trends.-Part-2.gif" style="width:100%; height:100%" />
+
+
+            </div>
+
+        </div>
+
+
+
+        <div class="row" style="margin-bottom:40px">
+
+            <div class="col-lg-2 col-md-2">
+                <img src="~/Content/img/150_sleep1_600.gif" class="img img-responsive" style="width:100%; height:100%" />
+            </div>
+
+            <div class="col-lg-8 col-md-8">
+
+                @using (@Html.BeginForm("Ads", "User"))
+                {
+                <div class="navbar-form ">
+                    <div class="form-group">
+
+                        <input type="text" class="form-control" placeholder="Search" name="search" id="search">
+                    </div>
+                    <button type="submit" class="btn btn-success">Search</button>
+                </div>
+
+                }
+
+                <div class="row">
+                    @{int x = 0; }
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            x++;
+                            <div class="col-lg-4 col-md-4" style="height:200px;margin-top:100px">
+
+                                <img class="img img-responsive cimg" src="@Url.Content(item.ProductImage)" style=" height:100%;width:100% ;border-radius:50px 50px 50px 50px" />
+                                <h4 style="color:#808080; font-family:'Arial Rounded MT';text-align:center"> @Html.ActionLink(@item.ProductName, "ProductDetails", new { id = @item.ProductID })</h4>                               
+                                <h5  style="color:#808080; font-family:'Arial Rounded MT';text-align:center">@item.ProductPrice </h5>
+                                <div style="margin-left:160px">
+                                    @*@Html.ActionLink("Add to Cart", "Adtocart", new { id = item.ProductID }, new { @class = "btn btn-danger btn-sm" })*@
+                                    
+
+                                    <a class= "btn btn-success btn-sm"  href="@Url.Action("Adtocart",  new { id = item.ProductID })"><i style="font-size:24px" class="fa">&#xf07a;</i>Add to Cart</a>
+
+
+
+                                </div>
+                            </div>
+
+                            }
+                        }
+                    <h4>@x Results Found</h4>
+                </div>
+            </div>
+
+
+            <div class="col-lg-2 col-md-2">
+                <img src="~/Content/img/LOB_val_600.gif" class="img img-responsive" style="width:100%; height:100%" />
+            </div>
+
+
+
+
+
+        </div>
+
+
+    </div>
+
+    <div id="container" style="margin-left: 20px">
+        <p></p>
+        <p></p>
+        <div class="pagination" style="margin-left: 400px">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+            of @Model.PageCount   @Html.PagedListPager(Model, page => Url.Action("Ads", new { page }))
+        </div>
+    </div>
+</body>
+</html>

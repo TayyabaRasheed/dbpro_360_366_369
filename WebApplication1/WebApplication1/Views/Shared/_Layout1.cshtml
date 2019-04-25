@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .na {
+            text-decoration: none;
+            color: white;
+        }
+    </style>
+    <title>@Page.Title</title>
+    @RenderSection("head", required: false)
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-inverse" style="">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Mobile-Inventory</a>
+            </div>
+
+
+            <ul class="nav navbar-nav">
+                @if (Session["AdminID"] == null)
+                {
+
+                    <li>@Html.ActionLink("Category", "Index", "User", null, new { @class = "ht" })</li>
+                }
+                else
+                {
+                    <li>@Html.ActionLink("View Categories", "ViewCategory", "Admin", null, new { @class = "ht" })</li>
+                }
+                <li>
+                    @if (Session["CustomerID"] != null)
+                    {
+                        @Html.ActionLink("All Products", "AllProducts", "User", null, new { @class = "ht" })
+
+                    }
+
+                    @if (Session["AdminID"] != null)
+                    {
+                        @Html.ActionLink("Add Category", "Create", "Admin", null, new { @class = "ht" })
+
+
+                    }
+
+
+
+
+                </li>
+                <li>
+                    @if (Session["AdminID"] != null)
+                    {
+
+                        @Html.ActionLink("Add Product", "AddProduct", "Admin", null, new { @class = "ht" })
+
+
+                    }
+                </li>
+
+                <li>
+                    @if (Session["AdminID"] != null)
+                    {
+
+
+                        @Html.ActionLink("All Products", "AllProducts", "Admin", null, new { @class = "ht" })
+
+                    }
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+
+                @if (Session["AdminID"] == null)
+                {
+
+
+
+                    <li>
+                        @if (Session["CustomerID"] == null)
+                        {
+
+                            @Html.ActionLink("Sign In", "login", "User", null, new { @class = "ht", })
+
+                        }
+                    </li>
+                    <li>
+                        @if (Session["CustomerID"] == null)
+                        {
+                            @Html.ActionLink("Sign Up", "SignUp", "User", null, new { @class = "ht" })
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Sign Out", "Signout", "User", null, new { @class = "ht" })
+                        }
+
+                    </li>
+                }
+                <li>
+                    @if (Session["AdminID"] != null)
+                    {
+                        @Html.ActionLink("Sign Out", "Signout", "Admin", null, new { @class = "ht" })
+                    }
+                </li>
+            </ul>
+
+
+        </div>
+        @if (Session["AdminID"] == null)
+            {
+                using (@Html.BeginForm("Ads", "User"))
+                {
+                <div class="navbar-form ">
+                    <div class="form-group">
+
+                        <input type="text" class="form-control" placeholder="Search" name="search" id="search">
+                    </div>
+                    <button type="submit" class="btn btn-success">Search</button>
+                </div>
+
+            }
+        }
+    </nav>
+
+    @RenderBody()
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
