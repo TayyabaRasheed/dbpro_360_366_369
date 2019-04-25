@@ -4,22 +4,26 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3481d4a391a940e3b0191dc8f3b1e307" Name="Diagram1">
-        <EntityTypeShape EntityType="CartModel.Admin" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CartModel.CartReport" Width="1.5" PointX="7.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CartModel.Category" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CartModel.Customer" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CartModel.Product" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="CartModel.Report1" Width="1.5" PointX="5.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CartModel.tbl_invoice" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CartModel.tbl_order" Width="1.5" PointX="7.5" PointY="1.375" IsExpanded="true" />
-        <AssociationConnector Association="CartModel.FK__Category__Catego__21B6055D" ManuallyRouted="false" />
-        <AssociationConnector Association="CartModel.FK__Product__ProdctF__22AA2996" ManuallyRouted="false" />
-        <AssociationConnector Association="CartModel.FK__Product__ProdctF__24927208" ManuallyRouted="false" />
-        <AssociationConnector Association="CartModel.FK__Product__ProdctF__239E4DCF" ManuallyRouted="false" />
-        <AssociationConnector Association="CartModel.FK__tbl_invoi__in_fk__2C3393D0" ManuallyRouted="false" />
-        <AssociationConnector Association="CartModel.FK__tbl_order__o_fk___2D27B809" ManuallyRouted="false" />
-        <AssociationConnector Association="CartModel.FK__tbl_order__o_fk___31EC6D26" ManuallyRouted="false" />
+      <Diagram DiagramId="b6da39e19569431291d4453d9af5795a" Name="Diagram1">
+        <EntityTypeShape EntityType="DB17Model.Admin" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB17Model.CartReport" Width="1.5" PointX="2.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB17Model.Category" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB17Model.Customer" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB17Model.Product" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB17Model.Report1" Width="1.5" PointX="4.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB17Model.tbl_invoice" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB17Model.tbl_order" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="DB17Model.FK__Category__Catego__21B6055D" ManuallyRouted="false" />
+        <AssociationConnector Association="DB17Model.FK__Product__ProdctF__22AA2996" ManuallyRouted="false" />
+        <AssociationConnector Association="DB17Model.FK__Product__ProdctF__24927208" ManuallyRouted="false" />
+        <AssociationConnector Association="DB17Model.FK__Product__ProdctF__239E4DCF" ManuallyRouted="false" />
+        <AssociationConnector Association="DB17Model.FK__tbl_invoi__in_fk__25869641" ManuallyRouted="false" />
+        <AssociationConnector Association="DB17Model.FK__tbl_invoi__in_fk__267ABA7A" ManuallyRouted="false" />
+        <AssociationConnector Association="DB17Model.FK__tbl_order__o_fk___286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="DB17Model.FK__tbl_order__o_fk___2A4B4B5E" ManuallyRouted="false" />
+        <AssociationConnector Association="DB17Model.FK__tbl_order__o_fk___276EDEB3" ManuallyRouted="false" />
+        <AssociationConnector Association="DB17Model.FK__tbl_order__o_fk___29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="DB17Model.FK__tbl_order__o_fk___2B3F6F97" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

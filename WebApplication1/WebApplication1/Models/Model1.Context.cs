@@ -13,10 +13,10 @@ namespace WebApplication1.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CartEntities : DbContext
+    public partial class DB17Entities : DbContext
     {
-        public CartEntities()
-            : base("name=CartEntities")
+        public DB17Entities()
+            : base("name=DB17Entities")
         {
         }
     

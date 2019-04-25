@@ -17,6 +17,8 @@ namespace WebApplication1.Models
         public tbl_invoice()
         {
             this.tbl_order = new HashSet<tbl_order>();
+            this.tbl_order1 = new HashSet<tbl_order>();
+            this.tbl_order2 = new HashSet<tbl_order>();
         }
     
         public int in_id { get; set; }
@@ -25,6 +27,9 @@ namespace WebApplication1.Models
         public Nullable<double> in_totalbill { get; set; }
     
         public virtual Customer Customer { get; set; }
+        public virtual Customer Customer1 { get; set; }
         public virtual ICollection<tbl_order> tbl_order { get; set; }
+        public virtual ICollection<tbl_order> tbl_order1 { get; set; }
+        public virtual ICollection<tbl_order> tbl_order2 { get; set; }
     }
 }

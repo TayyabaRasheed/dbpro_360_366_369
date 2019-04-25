@@ -17,6 +17,7 @@ namespace WebApplication1.Models
         public Product()
         {
             this.tbl_order = new HashSet<tbl_order>();
+            this.tbl_order1 = new HashSet<tbl_order>();
         }
     
         public int ProductID { get; set; }
@@ -33,5 +34,6 @@ namespace WebApplication1.Models
         public virtual Category Category { get; set; }
         public virtual Customer Customer { get; set; }
         public virtual ICollection<tbl_order> tbl_order { get; set; }
+        public virtual ICollection<tbl_order> tbl_order1 { get; set; }
     }
 }

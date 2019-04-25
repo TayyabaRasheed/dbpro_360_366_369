@@ -11,7 +11,7 @@ namespace WebApplication1.Controllers
 {
     public class AdminController : Controller
     {
-        CartEntities db = new CartEntities();
+        DB17Entities db = new DB17Entities();
         // GET: Admin
         [HttpGet]
         public ActionResult login()
@@ -200,7 +200,7 @@ namespace WebApplication1.Controllers
 
         public ActionResult Delete(int? id)
         {
-            CartEntities db = new CartEntities();
+            DB17Entities db = new DB17Entities();
             Product p = db.Products.Where(x => x.ProductID == id).SingleOrDefault();
             db.Products.Remove(p);
             db.SaveChanges();
@@ -208,7 +208,7 @@ namespace WebApplication1.Controllers
         }
         public ActionResult DeleteCategory(int? id)
         {
-            CartEntities db = new CartEntities();
+            DB17Entities db = new DB17Entities();
             Category p = db.Categories.Where(x => x.CategoryID == id).SingleOrDefault();
             db.Categories.Remove(p);
             db.SaveChanges();
@@ -216,7 +216,7 @@ namespace WebApplication1.Controllers
         }
         public ActionResult RegisteredCustomers()
         {
-            CartEntities db = new CartEntities();
+            DB17Entities db = new DB17Entities();
 
             List<Customer> list = db.Customers.ToList();
             List<Customers> viewList = new List<Customers>();
@@ -285,7 +285,7 @@ namespace WebApplication1.Controllers
         public ActionResult DeleteCustomer(int? id)
         {
 
-            CartEntities db = new CartEntities();
+            DB17Entities db = new DB17Entities();
                 Customer p = db.Customers.Where(x => x.CustomerID == id).SingleOrDefault();
                 db.Customers.Remove(p);
                 db.SaveChanges();

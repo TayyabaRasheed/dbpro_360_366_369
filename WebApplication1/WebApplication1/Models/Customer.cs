@@ -18,6 +18,7 @@ namespace WebApplication1.Models
         {
             this.Products = new HashSet<Product>();
             this.tbl_invoice = new HashSet<tbl_invoice>();
+            this.tbl_invoice1 = new HashSet<tbl_invoice>();
         }
     
         public int CustomerID { get; set; }
@@ -32,5 +33,6 @@ namespace WebApplication1.Models
     
         public virtual ICollection<Product> Products { get; set; }
         public virtual ICollection<tbl_invoice> tbl_invoice { get; set; }
+        public virtual ICollection<tbl_invoice> tbl_invoice1 { get; set; }
     }
 }

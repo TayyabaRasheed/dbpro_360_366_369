@@ -23,6 +23,9 @@ namespace WebApplication1.Models
         public Nullable<int> o_unitprice { get; set; }
     
         public virtual Product Product { get; set; }
+        public virtual Product Product1 { get; set; }
         public virtual tbl_invoice tbl_invoice { get; set; }
+        public virtual tbl_invoice tbl_invoice1 { get; set; }
+        public virtual tbl_invoice tbl_invoice2 { get; set; }
     }
 }
