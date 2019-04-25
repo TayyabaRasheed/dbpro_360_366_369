@@ -132,7 +132,88 @@ namespace WebApplication1.Controllers
         }
 
 
-        
+        [HttpGet]
+        public ActionResult AddProduct()
+        {
+            List<Category> li = db.Categories.ToList();
+            ViewBag.categorylist = new SelectList(li, "CategoryID", "CategoryName");
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddProduct(Product pvm, HttpPostedFileBase imgfile)
+        {
+            List<Product> li = db.Products.ToList();
+            ViewBag.categorylist = new SelectList(li, "CategoryID", "CategoryName");
+
+
+            string path = uploadimgfile(imgfile);
+            if (path.Equals("-1"))
+            {
+                ViewBag.error = "Image could not be uploaded....";
+            }
+            else
+            {
+                Product p = new Product();
+                p.ProductName = pvm.ProductName;
+                p.ProductPrice = pvm.ProductPrice;
+                p.ProductImage = path;
+                p.ProductStatus = 1;
+                p.ProdctFK_category = pvm.ProdctFK_category;
+                p.ProductDescription = pvm.ProductDescription;
+                p.ProdctFK_admin = Convert.ToInt32(Session["AdminID"].ToString());
+                db.Products.Add(p);
+                db.SaveChanges();
+                Response.Redirect("AddProduct");
+                
+            }
+            List<Category> list = db.Categories.ToList();
+            ViewBag.categorylist = new SelectList(list, "CategoryID", "CategoryName");
+            return View();
+        }
+
+
+        public ActionResult ShowProduct(int? id, int? page)
+        {
+            int pagesize = 9, pageindex = 1;
+            pageindex = page.HasValue ? Convert.ToInt32(page) : 1;
+            var list = db.Products.Where(x => x.ProdctFK_category == id).OrderByDescending(x => x.ProductID).ToList();
+            IPagedList<Product> stu = list.ToPagedList(pageindex, pagesize);
+
+
+            return View(stu);
+
+
+        }
+
+        public ActionResult AllProducts(int? page)
+        {
+            int pagesize = 9, pageindex = 1;
+            pageindex = page.HasValue ? Convert.ToInt32(page) : 1;
+            var list = db.Products.Where(x => x.ProductStatus == 1).OrderByDescending(x => x.ProductID).ToList();
+            IPagedList<Product> stu = list.ToPagedList(pageindex, pagesize);
+
+
+            return View(stu);
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            CartEntities db = new CartEntities();
+            Product p = db.Products.Where(x => x.ProductID == id).SingleOrDefault();
+            db.Products.Remove(p);
+            db.SaveChanges();
+            return View("Create");
+        }
+        public ActionResult DeleteCategory(int? id)
+        {
+            CartEntities db = new CartEntities();
+            Category p = db.Categories.Where(x => x.CategoryID == id).SingleOrDefault();
+            db.Categories.Remove(p);
+            db.SaveChanges();
+            return View("Create");
+        }
         public ActionResult RegisteredCustomers()
         {
             CartEntities db = new CartEntities();

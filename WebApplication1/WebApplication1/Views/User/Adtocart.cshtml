@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Adtocart";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+@*<h2>Adtocart</h2>*@
+
+
+
+
+@model WebApplication1.Models.Product
+@{
+//ViewBag.Title = "Adtocart";
+}
+<br />
+<br />
+<br />
+@using (@Html.BeginForm())
+{
+
+
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-4 col-md-4 col-sm-4">
+
+                <img style="min-height:200px; width:200px;" src="@Url.Content(Model.ProductImage)" />
+
+
+            </div>
+
+
+
+            <div class="col-lg-8 col-md-8 col-sm-8">
+
+                <h1>Product Name: @Model.ProductName</h1>
+                <h2>Price: @Model.ProductPrice PKR</h2>
+                <h6>Description: @Model.ProductDescription</h6>
+
+                <input type="number" name="qty" value="0" id="qty" min="1" max="10" />
+
+                <input type="submit" value="Submit" class="btn btn-default" />
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+}
+
