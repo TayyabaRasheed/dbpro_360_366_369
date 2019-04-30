@@ -42,6 +42,58 @@ namespace WebApplication1.Controllers
             stream.Seek(0, SeekOrigin.Begin);
             return File(stream, "application/pdf", "ListCustomers.pdf");
         }
+        public ActionResult OrderInfo()
+        {
+            ViewBag.ListOrders = db.tbl_order.ToList();
+            return View();
+        }
+        public ActionResult Export1()
+        {
+            ReportDocument rd1 = new ReportDocument();
+            rd1.Load(Path.Combine(Server.MapPath("~/Reports/OrderReport.rpt")));
+            rd1.SetDataSource(db.tbl_order.Select(p => new
+            {
+                o_id = p.o_id,
+                o_date = p.o_date,
+                o_qty = p.o_qty,
+                o_bill = p.o_bill,
+                o_unitprice = p.o_unitprice
+            }).ToList());
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+            Stream stream = rd1.ExportToStream
+                (CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "ListOrders.pdf");
+        }
+
+        public ActionResult ProductInfo()
+        {
+            ViewBag.ListCustomers = db.Products.ToList();
+            return View();
+        }
+        public ActionResult Export2()
+        {
+            ReportDocument rd1 = new ReportDocument();
+            rd1.Load(Path.Combine(Server.MapPath("~/Reports/ProductReport.rpt")));
+            rd1.SetDataSource(db.Products.Select(p => new
+            {
+                ProductID = p.ProductID,
+                ProductName = p.ProductName,
+                ProductDescription = p.ProductDescription,
+                ProductPrice = p.ProductPrice,
+                ProdctFK_category = p.ProdctFK_category
+            }).ToList());
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+            Stream stream = rd1.ExportToStream
+                (CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "ListProducts.pdf");
+        }
+
         [HttpGet]
         public ActionResult login()
         {
