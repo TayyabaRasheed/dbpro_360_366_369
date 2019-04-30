@@ -6,20 +6,47 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
 using PagedList;
+using WebApplication1.Reports;
+using CrystalDecisions.CrystalReports.Engine;
 
 namespace WebApplication1.Controllers
 {
     public class AdminController : Controller
     {
-        DB17Entities db = new DB17Entities();
+        CartEntities db = new CartEntities();
         // GET: Admin
+
+
+        public ActionResult CustomerInfo()
+        {
+            ViewBag.ListCustomers = db.Customers.ToList();
+            return View();
+        }
+        public ActionResult Export()
+        {
+            ReportDocument rd = new ReportDocument();
+            rd.Load(Path.Combine(Server.MapPath("~/Reports/CustomerReport.rpt")));
+            rd.SetDataSource(db.Customers.Select(p => new
+            {
+                CustomerID = p.CustomerID,
+                UserName = p.UserName,
+                EmailAddress = p.EmailAddress,
+                HomeAdress = p.HomeAdress,
+                ContactNumber = p.ContactNumber
+            }).ToList());
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+            Stream stream = rd.ExportToStream
+                (CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "ListCustomers.pdf");
+        }
         [HttpGet]
         public ActionResult login()
         {
             return View();
         }
-
-
         [HttpPost]
         public ActionResult login(Admin avm)
         {
@@ -39,8 +66,6 @@ namespace WebApplication1.Controllers
 
             return View();
         }
-
-
         public ActionResult Create()
         {
             if (Session["AdminID"] == null)
@@ -49,8 +74,6 @@ namespace WebApplication1.Controllers
             }
             return View();
         }
-
-
         [HttpPost]
         public ActionResult Create(Category cvm, HttpPostedFileBase imgfile)
         {
@@ -72,9 +95,7 @@ namespace WebApplication1.Controllers
             }
 
             return View();
-        } //end,,,,,,,,,,,,,,,,,,,
-
-
+        }
 
         public ActionResult ViewCategory(int? page)
         {
@@ -86,10 +107,6 @@ namespace WebApplication1.Controllers
 
             return View(stu);
         }
-
-
-
-
         public string uploadimgfile(HttpPostedFileBase file)
         {
             Random r = new Random();
@@ -132,6 +149,7 @@ namespace WebApplication1.Controllers
         }
 
 
+
         [HttpGet]
         public ActionResult AddProduct()
         {
@@ -166,7 +184,7 @@ namespace WebApplication1.Controllers
                 db.Products.Add(p);
                 db.SaveChanges();
                 Response.Redirect("AddProduct");
-                
+
             }
             List<Category> list = db.Categories.ToList();
             ViewBag.categorylist = new SelectList(list, "CategoryID", "CategoryName");
@@ -197,10 +215,9 @@ namespace WebApplication1.Controllers
 
             return View(stu);
         }
-
         public ActionResult Delete(int? id)
         {
-            DB17Entities db = new DB17Entities();
+            CartEntities db = new CartEntities();
             Product p = db.Products.Where(x => x.ProductID == id).SingleOrDefault();
             db.Products.Remove(p);
             db.SaveChanges();
@@ -208,7 +225,7 @@ namespace WebApplication1.Controllers
         }
         public ActionResult DeleteCategory(int? id)
         {
-            DB17Entities db = new DB17Entities();
+            CartEntities db = new CartEntities();
             Category p = db.Categories.Where(x => x.CategoryID == id).SingleOrDefault();
             db.Categories.Remove(p);
             db.SaveChanges();
@@ -216,7 +233,7 @@ namespace WebApplication1.Controllers
         }
         public ActionResult RegisteredCustomers()
         {
-            DB17Entities db = new DB17Entities();
+            CartEntities db = new CartEntities();
 
             List<Customer> list = db.Customers.ToList();
             List<Customers> viewList = new List<Customers>();
@@ -247,10 +264,9 @@ namespace WebApplication1.Controllers
 
 
         }
-
         //public ActionResult AllCustomers()
         //{
-        //    BakerySystemEntities db = new BakerySystemEntities();
+        //    CartEntities db = new CartEntities();
 
         //    List<Customer> list = db.Customers.ToList();
         //    List<Customers> viewList = new List<Customers>();
@@ -276,7 +292,7 @@ namespace WebApplication1.Controllers
 
 
         //    }
-           
+
         //    return View(viewList);
 
 
@@ -285,34 +301,20 @@ namespace WebApplication1.Controllers
         public ActionResult DeleteCustomer(int? id)
         {
 
-            DB17Entities db = new DB17Entities();
-                Customer p = db.Customers.Where(x => x.CustomerID == id).SingleOrDefault();
-                db.Customers.Remove(p);
-                db.SaveChanges();
-                return View("RegisteredCustomers");
-           
+            CartEntities db = new CartEntities();
+            Customer p = db.Customers.Where(x => x.CustomerID == id).SingleOrDefault();
+            db.Customers.Remove(p);
+            db.SaveChanges();
+            return View("RegisteredCustomers");
+
 
         }
-
-
-        //public ActionResult DeleteAllCustomer(int? id)
-        //{
-
-        //    BakerySystemEntities db = new BakerySystemEntities();
-        //    Customer p = db.Customers.Where(x => x.CustomerID == id).SingleOrDefault();
-        //    db.Customers.Remove(p);
-        //    db.SaveChanges();
-        //    return View("RegisteredCustomers");
-
-
-        //}
-
         public ActionResult Signout()
         {
             Session.RemoveAll();
             Session.Abandon();
 
-            return RedirectToAction("Index","User");
+            return RedirectToAction("Index", "User");
         }
 
     }

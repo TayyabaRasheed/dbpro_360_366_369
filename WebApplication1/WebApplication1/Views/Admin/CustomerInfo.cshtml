@@ -1,0 +1,39 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CustomerInfo</title>
+</head>
+<body>
+    <h3>List Customers</h3>
+    <table cellpadding="2" border="1">
+        <tr>
+            <th>CustomerID</th>
+            <th>UserName</th>
+            <th>EmailAddress</th>
+            <th>HomeAdress</th>
+            <th>ContactNumber</th>
+        </tr>
+        @foreach (var p in ViewBag.ListCustomers)
+        {
+            <tr>
+                <th>@p.CustomerID</th>
+                <th>@p.UserName</th>
+                <th>@p.EmailAddress</th>
+                <th>@p.HomeAdress</th>
+                <th>@p.ContactNumber</th>
+            </tr>
+
+        }
+    </table>
+    <br /><br />
+    <a href="@Url.Action("Export","Admin")">Export Report</a>
+
+</body>
+</html>

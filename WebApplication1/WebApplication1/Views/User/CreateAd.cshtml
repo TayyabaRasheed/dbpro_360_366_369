@@ -1,6 +1,6 @@
 ﻿@model WebApplication1.Models.Product
 @{
-   
+
 }
 
 <style>
@@ -11,7 +11,7 @@
 
     #main-div {
         height: 900px;
-        background-image: url('../../Content/img/building6.jpg');
+        background-image: url('../../Content/img/218723749-backgrounds-for-mobile.jpg');
         background-size: 100% 900px;
     }
 
@@ -46,11 +46,11 @@
 <script src="http://code.jquery.com/jquery.js"></script>
 <div id="main-div">
     <div id="box" class="img-responsive">
-       @using (Html.BeginForm("CreateAd",
-                             "User",
-                             FormMethod.Post,
-                             new { enctype = "multipart/form-data" }))
-       {
+        @using (Html.BeginForm("CreateAd",
+                                 "User",
+                                 FormMethod.Post,
+                                 new { enctype = "multipart/form-data" }))
+        {
             <div class="insidebox">
                 <div> <h1>Post An Ad</h1></div>
 
@@ -60,7 +60,7 @@
                     <div class="input-group">
                         <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
                         @Html.DropDownListFor(x => x.ProdctFK_category, ViewBag.categorylist as SelectList, "--select--", new { @class = "form-control" })
-                       
+
                     </div>
                     <span style="color:red">   @Html.ValidationMessageFor(x => x.ProdctFK_category) </span>
 
@@ -91,7 +91,7 @@
                     <span style="color:red">   @Html.ValidationMessageFor(x => x.ProductPrice) </span>
 
                 </div>
-             
+
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>

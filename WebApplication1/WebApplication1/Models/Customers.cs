@@ -15,6 +15,5 @@ namespace WebApplication1.Models
         public Nullable<System.DateTime> DateOfBirth { get; set; }
         public string ContactNumber { get; set; }
         public string UserImage { get; set; }
-
     }
 }

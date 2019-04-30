@@ -13,7 +13,7 @@
 
     #main-div {
         height: 900px;
-        background-image: url('../../Content/img/building6.jpg');
+        background-image: url('../../Content/img/218723749-backgrounds-for-mobile.jpg');
         background-size: 100% 900px;
     }
 
@@ -49,9 +49,9 @@
 <div id="main-div">
     <div id="box" class="img-responsive">
         @using (Html.BeginForm("AddProduct",
-                            "Admin",
-                            FormMethod.Post,
-                            new { enctype = "multipart/form-data" }))
+                                "Admin",
+                                FormMethod.Post,
+                                new { enctype = "multipart/form-data" }))
         {
             <div class="insidebox">
                 <div> <h1>ADD NEW PRODUCT</h1></div>
@@ -62,10 +62,10 @@
                     <div class="input-group">
                         <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
                         @Html.DropDownListFor(x => x.ProdctFK_category, ViewBag.categorylist as SelectList, "--select--", new { @class = "form-control" })
-                        
-                           
 
-</div>
+
+
+                    </div>
                     <span style="color:red">   @Html.ValidationMessageFor(x => x.ProdctFK_category) </span>
 
                 </div>

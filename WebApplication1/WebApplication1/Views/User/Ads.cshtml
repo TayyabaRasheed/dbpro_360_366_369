@@ -13,9 +13,6 @@
         transition: transform 5s;
     }
 
-        .cimg:hover {
-            -webkit-transform: rotatez(360deg);
-        }
 </style>
 
 
@@ -90,20 +87,20 @@
         <div class="row" style="margin-bottom:40px">
 
             <div class="col-lg-2 col-md-2">
-                <img src="~/Content/img/150_sleep1_600.gif" class="img img-responsive" style="width:100%; height:100%" />
+               
             </div>
 
             <div class="col-lg-8 col-md-8">
 
                 @using (@Html.BeginForm("Ads", "User"))
                 {
-                <div class="navbar-form ">
-                    <div class="form-group">
+                    <div class="navbar-form ">
+                        <div class="form-group">
 
-                        <input type="text" class="form-control" placeholder="Search" name="search" id="search">
+                            <input type="text" class="form-control" placeholder="Search" name="search" id="search">
+                        </div>
+                        <button type="submit" class="btn btn-success">Search</button>
                     </div>
-                    <button type="submit" class="btn btn-success">Search</button>
-                </div>
 
                 }
 
@@ -117,28 +114,28 @@
                             <div class="col-lg-4 col-md-4" style="height:200px;margin-top:100px">
 
                                 <img class="img img-responsive cimg" src="@Url.Content(item.ProductImage)" style=" height:100%;width:100% ;border-radius:50px 50px 50px 50px" />
-                                <h4 style="color:#808080; font-family:'Arial Rounded MT';text-align:center"> @Html.ActionLink(@item.ProductName, "ProductDetails", new { id = @item.ProductID })</h4>                               
-                                <h5  style="color:#808080; font-family:'Arial Rounded MT';text-align:center">@item.ProductPrice </h5>
+                                <h4 style="color:#808080; font-family:'Arial Rounded MT';text-align:center"> @Html.ActionLink(@item.ProductName, "ProductDetails", new { id = @item.ProductID })</h4>
+                                <h5 style="color:#808080; font-family:'Arial Rounded MT';text-align:center">@item.ProductPrice </h5>
                                 <div style="margin-left:160px">
                                     @*@Html.ActionLink("Add to Cart", "Adtocart", new { id = item.ProductID }, new { @class = "btn btn-danger btn-sm" })*@
-                                    
 
-                                    <a class= "btn btn-success btn-sm"  href="@Url.Action("Adtocart",  new { id = item.ProductID })"><i style="font-size:24px" class="fa">&#xf07a;</i>Add to Cart</a>
+
+                                    <a class="btn btn-success btn-sm" href="@Url.Action("Adtocart",  new { id = item.ProductID })"><i style="font-size:24px" class="fa">&#xf07a;</i>Add to Cart</a>
 
 
 
                                 </div>
                             </div>
 
-                            }
                         }
+                    }
                     <h4>@x Results Found</h4>
                 </div>
             </div>
 
 
             <div class="col-lg-2 col-md-2">
-                <img src="~/Content/img/LOB_val_600.gif" class="img img-responsive" style="width:100%; height:100%" />
+               
             </div>
 
 

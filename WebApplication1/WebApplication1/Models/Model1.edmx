@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DB17Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="CartModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="AdminID" />
@@ -43,7 +43,6 @@
           <Property Name="DateOfBirth" Type="datetime" />
           <Property Name="ContactNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="UserImage" Type="nvarchar(max)" />
-          <Property Name="Added On" Type="datetime" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -219,7 +218,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DB17ModelStoreContainer">
+        <EntityContainer Name="CartModelStoreContainer">
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CartReport" EntityType="Self.CartReport" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
@@ -277,7 +276,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="DB17Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="CartModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="AdminID" />
@@ -320,7 +319,6 @@
           <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
           <Property Name="ContactNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="UserImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Added_On" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Products" Relationship="Self.FK__Product__ProdctF__239E4DCF" FromRole="Customer" ToRole="Product" />
           <NavigationProperty Name="tbl_invoice" Relationship="Self.FK__tbl_invoi__in_fk__25869641" FromRole="Customer" ToRole="tbl_invoice" />
           <NavigationProperty Name="tbl_invoice1" Relationship="Self.FK__tbl_invoi__in_fk__267ABA7A" FromRole="Customer" ToRole="tbl_invoice" />
@@ -514,7 +512,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DB17Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="CartEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Admins" EntityType="Self.Admin" />
           <EntitySet Name="CartReports" EntityType="Self.CartReport" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
@@ -573,9 +571,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DB17ModelStoreContainer" CdmEntityContainer="DB17Entities">
+        <EntityContainerMapping StorageEntityContainer="CartModelStoreContainer" CdmEntityContainer="CartEntities">
           <EntitySetMapping Name="Admins">
-            <EntityTypeMapping TypeName="DB17Model.Admin">
+            <EntityTypeMapping TypeName="CartModel.Admin">
               <MappingFragment StoreEntitySet="Admin">
                 <ScalarProperty Name="AdminID" ColumnName="AdminID" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -585,7 +583,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CartReports">
-            <EntityTypeMapping TypeName="DB17Model.CartReport">
+            <EntityTypeMapping TypeName="CartModel.CartReport">
               <MappingFragment StoreEntitySet="CartReport">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="details" ColumnName="details" />
@@ -593,7 +591,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="DB17Model.Category">
+            <EntityTypeMapping TypeName="CartModel.Category">
               <MappingFragment StoreEntitySet="Category">
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
@@ -604,7 +602,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="DB17Model.Customer">
+            <EntityTypeMapping TypeName="CartModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -614,12 +612,11 @@
                 <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
                 <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
                 <ScalarProperty Name="UserImage" ColumnName="UserImage" />
-                <ScalarProperty Name="Added_On" ColumnName="Added On" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="DB17Model.Product">
+            <EntityTypeMapping TypeName="CartModel.Product">
               <MappingFragment StoreEntitySet="Product">
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
@@ -634,7 +631,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Report1">
-            <EntityTypeMapping TypeName="DB17Model.Report1">
+            <EntityTypeMapping TypeName="CartModel.Report1">
               <MappingFragment StoreEntitySet="Report1">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="details" ColumnName="details" />
@@ -642,7 +639,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tbl_invoice">
-            <EntityTypeMapping TypeName="DB17Model.tbl_invoice">
+            <EntityTypeMapping TypeName="CartModel.tbl_invoice">
               <MappingFragment StoreEntitySet="tbl_invoice">
                 <ScalarProperty Name="in_id" ColumnName="in_id" />
                 <ScalarProperty Name="in_fk_Customer" ColumnName="in_fk_Customer" />
@@ -652,7 +649,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tbl_order">
-            <EntityTypeMapping TypeName="DB17Model.tbl_order">
+            <EntityTypeMapping TypeName="CartModel.tbl_order">
               <MappingFragment StoreEntitySet="tbl_order">
                 <ScalarProperty Name="o_id" ColumnName="o_id" />
                 <ScalarProperty Name="o_fk_Product" ColumnName="o_fk_Product" />
@@ -680,7 +677,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

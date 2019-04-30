@@ -33,7 +33,6 @@
     <EntitySetMapping Name="Customers">
       <EntityTypeMapping TypeName="CartModel.Customer">
         <MappingFragment StoreEntitySet="Customer">
-          <ScalarProperty Name="Added_On" ColumnName="Added On" />
           <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />

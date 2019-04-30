@@ -15,6 +15,5 @@ namespace WebApplication1.Models
         public float bill { get; set; }
 
 
-
     }
 }
