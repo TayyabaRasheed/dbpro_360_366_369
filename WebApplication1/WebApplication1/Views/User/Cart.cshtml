@@ -36,36 +36,35 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Image)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CartFK_Product)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CartFK_customer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CartFK_category)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.CartID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.CartID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.CartID })
-            </td>
-        </tr>
-    }
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Image)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CartFK_Product)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CartFK_customer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CartFK_category)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CartID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CartID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CartID })
+        </td>
+    </tr>
+}
 
 </table>

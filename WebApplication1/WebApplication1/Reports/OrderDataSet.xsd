@@ -12,14 +12,13 @@
   <xs:element name="OrderDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="OrderDataSet" msprop:Generator_UserDSName="OrderDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Order" msprop:Generator_TableClassName="OrderDataTable" msprop:Generator_TableVarName="tableOrder" msprop:Generator_TablePropName="Order" msprop:Generator_RowDeletingName="OrderRowDeleting" msprop:Generator_RowChangingName="OrderRowChanging" msprop:Generator_RowEvHandlerName="OrderRowChangeEventHandler" msprop:Generator_RowDeletedName="OrderRowDeleted" msprop:Generator_UserTableName="Order" msprop:Generator_RowChangedName="OrderRowChanged" msprop:Generator_RowEvArgName="OrderRowChangeEvent" msprop:Generator_RowClassName="OrderRow">
+        <xs:element name="Order" msprop:Generator_TableClassName="OrderDataTable" msprop:Generator_TableVarName="tableOrder" msprop:Generator_RowChangedName="OrderRowChanged" msprop:Generator_TablePropName="Order" msprop:Generator_RowDeletingName="OrderRowDeleting" msprop:Generator_RowChangingName="OrderRowChanging" msprop:Generator_RowEvHandlerName="OrderRowChangeEventHandler" msprop:Generator_RowDeletedName="OrderRowDeleted" msprop:Generator_RowClassName="OrderRow" msprop:Generator_UserTableName="Order" msprop:Generator_RowEvArgName="OrderRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="o_id" msprop:Generator_ColumnVarNameInTable="columno_id" msprop:Generator_ColumnPropNameInRow="o_id" msprop:Generator_ColumnPropNameInTable="o_idColumn" msprop:Generator_UserColumnName="o_id" type="xs:int" />
-              <xs:element name="o_date" msprop:Generator_ColumnVarNameInTable="columno_date" msprop:Generator_ColumnPropNameInRow="o_date" msprop:Generator_ColumnPropNameInTable="o_dateColumn" msprop:Generator_UserColumnName="o_date" type="xs:dateTime" minOccurs="0" />
-              <xs:element name="o_qty" msprop:Generator_ColumnVarNameInTable="columno_qty" msprop:Generator_ColumnPropNameInRow="o_qty" msprop:Generator_ColumnPropNameInTable="o_qtyColumn" msprop:Generator_UserColumnName="o_qty" type="xs:int" minOccurs="0" />
-              <xs:element name="o_bill" msprop:Generator_ColumnVarNameInTable="columno_bill" msprop:Generator_ColumnPropNameInRow="o_bill" msprop:Generator_ColumnPropNameInTable="o_billColumn" msprop:Generator_UserColumnName="o_bill" type="xs:decimal" minOccurs="0" />
-              <xs:element name="o_unitprice" msprop:Generator_ColumnVarNameInTable="columno_unitprice" msprop:Generator_ColumnPropNameInRow="o_unitprice" msprop:Generator_ColumnPropNameInTable="o_unitpriceColumn" msprop:Generator_UserColumnName="o_unitprice" type="xs:int" minOccurs="0" />
+              <xs:element name="o_date" msprop:Generator_ColumnVarNameInTable="columno_date" msprop:Generator_ColumnPropNameInRow="o_date" msprop:Generator_ColumnPropNameInTable="o_dateColumn" msprop:Generator_UserColumnName="o_date" type="xs:dateTime" />
+              <xs:element name="o_qty" msprop:Generator_ColumnVarNameInTable="columno_qty" msprop:Generator_ColumnPropNameInRow="o_qty" msprop:Generator_ColumnPropNameInTable="o_qtyColumn" msprop:Generator_UserColumnName="o_qty" type="xs:int" />
+              <xs:element name="o_unitprice" msprop:Generator_ColumnVarNameInTable="columno_unitprice" msprop:Generator_ColumnPropNameInRow="o_unitprice" msprop:Generator_ColumnPropNameInTable="o_unitpriceColumn" msprop:Generator_UserColumnName="o_unitprice" type="xs:int" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

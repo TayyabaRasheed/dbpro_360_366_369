@@ -1,0 +1,38 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CategoryInfo</title>
+</head>
+<body>
+    <h3>List Categories</h3>
+    <table cellpadding="2" border="1">
+        <tr>
+            <th>CategoryID</th>
+            <th>CategoryName</th>
+            
+
+
+
+        </tr>
+        @foreach (var p in ViewBag.ListCategory)
+        {
+            <tr>
+                <td>@p.CategoryID</td>
+                <td>@p.CategoryName</td>
+                
+
+            </tr>
+
+        }
+    </table>
+    <br /><br />
+    <a href="@Url.Action("Export4","Admin")">Export Report</a>
+</body>
+</html>

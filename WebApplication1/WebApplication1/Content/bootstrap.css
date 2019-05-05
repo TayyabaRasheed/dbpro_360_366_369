@@ -3815,7 +3815,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   display: block;
 }
 
-.nav > li > a {
+.nav > li > a ,.nav > li > .ht {
   position: relative;
   display: block;
   padding: 10px 15px;
@@ -3866,7 +3866,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   margin-bottom: -1px;
 }
 
-.nav-tabs > li > a {
+.nav-tabs > li > a,.nav > li > .ht {
   margin-right: 2px;
   line-height: 1.428571429;
   border: 1px solid transparent;
@@ -3896,7 +3896,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   float: none;
 }
 
-.nav-tabs.nav-justified > li > a {
+.nav-tabs.nav-justified > li > a ,.nav > li > .ht{
   text-align: center;
 }
 
@@ -3907,7 +3907,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   }
 }
 
-.nav-tabs.nav-justified > li > a {
+.nav-tabs.nav-justified > li > a ,.nav > li > .ht{
   margin-right: 0;
   border-bottom: 1px solid #dddddd;
 }
@@ -3920,7 +3920,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   float: left;
 }
 
-.nav-pills > li > a {
+.nav-pills > li > a,.nav > li > .ht {
   border-radius: 5px;
 }
 

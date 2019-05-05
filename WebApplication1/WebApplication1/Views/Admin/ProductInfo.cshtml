@@ -11,28 +11,33 @@
     <title>ProductInfo</title>
 </head>
 <body>
-    <h3>List Products</h3>
+    <h3>List Orders</h3>
     <table cellpadding="2" border="1">
         <tr>
             <th>ProductID</th>
             <th>ProductName</th>
             <th>ProductDescription</th>
+            <th>CategoryName</th>
             <th>ProductPrice</th>
-            <th>ProdctFK_category</th>
+
+
+
         </tr>
-        @foreach (var p in ViewBag.ListProducts)
+        @foreach (var p in ViewBag.ListProduct)
         {
             <tr>
-                <th>@p.ProductID</th>
-                <th>@p.ProductName</th>
-                <th>@p.ProductDescription</th>
-                <th>@p.ProductPrice</th>
-                <th>@p.ProdctFK_category</th>
+                <td>@p.ProductID</td>
+                <td>@p.ProductName</td>
+                <td>@p.ProductDescription</td>
+
+                <td>@p.CategoryName</td>
+                <td>@p.ProductPrice</td>
+
             </tr>
 
         }
     </table>
     <br /><br />
-    <a href="@Url.Action("Export2","Admin")">Export Report</a>
+    <a href="@Url.Action("Export1","Admin")">Export Report</a>
 </body>
 </html>

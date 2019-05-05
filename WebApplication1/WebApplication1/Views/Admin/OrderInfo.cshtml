@@ -14,20 +14,23 @@
     <h3>List Orders</h3>
     <table cellpadding="2" border="1">
         <tr>
-            <th>o_id</th>
-            <th>o_date</th>
-            <th>o_qty</th>
-            <th>o_bill</th>
-            <th>o_unitprice</th>
+            <th>OrderID</th>
+            <th>CustomerName</th>
+            <th>product</th>
+            <th>Quantity</th>
+            
+           
+           
         </tr>
-        @foreach (var p in ViewBag.ListOrders)
+        @foreach (var p in ViewBag.ListOrder)
         {
             <tr>
-                <th>@p.o_id</th>
-                <th>@p.o_date</th>
-                <th>@p.o_qty</th>
-                <th>@p.o_bill</th>
-                <th>@p.o_unitprice</th>
+                <td>@p.o_id</td>
+                <td>@p.UserName</td>
+                <td>@p.ProductName</td>
+               
+                <td>@p.o_qty</td>
+                
             </tr>
 
         }

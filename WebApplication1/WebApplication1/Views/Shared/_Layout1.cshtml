@@ -6,6 +6,16 @@
             text-decoration: none;
             color: white;
         }
+
+        #container ul ul {
+            display : none;
+        }
+
+        #container ul li :hover > ul {
+            display : block;
+        }
+
+
     </style>
     <title>@Page.Title</title>
     @RenderSection("head", required: false)
@@ -59,6 +69,26 @@
                     }
                 </li>
 
+
+                <li>
+                    @if (Session["AdminID"] != null)
+                    {
+
+
+                        <ul style="list-style:none">
+                            <li>@Html.ActionLink("Reports", null, null, null, new { @class = "ht" })</li>
+                            <ul style="list-style:none">
+                                <li>@Html.ActionLink("CustomerReport", "CustomerInfo", "Admin", null, new { @class = "ht" })</li>
+                                <li>@Html.ActionLink("ProductReport", "ProductInfo", "Admin", null, new { @class = "ht" })</li>
+                                <li>@Html.ActionLink("CustomerOrder", "OrderInfo", "Admin", null, new { @class = "ht" })</li>
+                            </ul>
+                        </ul>
+
+                    }
+                </li>
+
+
+
                 <li>
                     @if (Session["AdminID"] != null)
                     {
@@ -96,6 +126,18 @@
                         }
 
                     </li>
+
+
+                    <li>
+                        @if (Session["AdminID"] == null)
+                        {
+
+                            @Html.ActionLink("ADMIN", "login", "Admin", null, new { @class = "ht", })
+
+                        }
+                    </li>
+
+
                 }
                 <li>
                     @if (Session["AdminID"] != null)

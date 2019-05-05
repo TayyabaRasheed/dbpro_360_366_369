@@ -1,6 +1,6 @@
 ﻿@model WebApplication1.Models.Customer
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout1.cshtml";
 }
 
 <style>
@@ -47,9 +47,9 @@
 <div id="main-div">
     <div id="box" class="img-responsive">
         @using (Html.BeginForm("SignUp",
-                            "User",
-                            FormMethod.Post,
-                            new { enctype = "multipart/form-data" }))
+                        "User",
+                        FormMethod.Post,
+                        new { enctype = "multipart/form-data" }))
         {
             <div class="insidebox">
                 <div> <h1>User SignUp</h1></div>
@@ -94,7 +94,7 @@
                     <div class="input-group">
                         <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
                         @*<asp:TextBox ID="TextBox1" runat="server" class="form-control" placeholder="Username" required="required"></asp:TextBox>*@
-                        @Html.TextBoxFor(x => x.HomeAdress, new { @class = "form-control", @placeholder = "HomeAddress" })
+                        @Html.TextBoxFor(x => x.HomeAdress, new { @class = "form-control", @placeholder = "Home Address" })
 
                     </div>
                     <span style="color:red">   @Html.ValidationMessageFor(x => x.HomeAdress) </span>

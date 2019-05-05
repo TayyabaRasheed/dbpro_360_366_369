@@ -5,16 +5,25 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
-using PagedList;
 using WebApplication1.Reports;
+using PagedList;
 using CrystalDecisions.CrystalReports.Engine;
+
 
 namespace WebApplication1.Controllers
 {
     public class AdminController : Controller
     {
-        CartEntities db = new CartEntities();
+        DB17Entities1 db = new DB17Entities1();
         // GET: Admin
+
+
+        public ActionResult CustomerOrder()
+        {
+            //ViewBag.ListCustomers = db.Customers.ToList();
+            return View();
+        }
+
 
 
         public ActionResult CustomerInfo()
@@ -42,23 +51,65 @@ namespace WebApplication1.Controllers
             stream.Seek(0, SeekOrigin.Begin);
             return File(stream, "application/pdf", "ListCustomers.pdf");
         }
-        public ActionResult OrderInfo()
+
+
+        public ActionResult CategoryInfo()
         {
-            ViewBag.ListOrders = db.tbl_order.ToList();
+            ViewBag.ListCategory = db.Categories.ToList();
             return View();
         }
+
+        public ActionResult Export4()
+        {
+
+            ReportDocument rd3 = new ReportDocument();
+            rd3.Load(Path.Combine(Server.MapPath("~/Reports/CategoryReport.rpt")));
+            //rd1.SetDataSource(db.tbl_order.Select(p => new
+            rd3.SetDataSource(db.Categories.Select(p => new
+            {
+                CategoryID = p.CategoryID,
+                CategoryName = p.CategoryName
+
+
+
+            }).ToList());
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+            Stream stream = rd3.ExportToStream
+                (CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "ListCategory.pdf");
+
+
+
+
+
+        }
+
+
+        public ActionResult OrderInfo()
+        {
+            ViewBag.ListOrder = db.CustomerOrder().ToList();
+            return View();
+        }
+
         public ActionResult Export1()
         {
+
             ReportDocument rd1 = new ReportDocument();
-            rd1.Load(Path.Combine(Server.MapPath("~/Reports/OrderReport.rpt")));
-            rd1.SetDataSource(db.tbl_order.Select(p => new
-            {
-                o_id = p.o_id,
-                o_date = p.o_date,
-                o_qty = p.o_qty,
-                o_bill = p.o_bill,
-                o_unitprice = p.o_unitprice
-            }).ToList());
+            rd1.Load(Path.Combine(Server.MapPath("~/Reports/REPORT.rpt")));
+            //rd1.SetDataSource(db.tbl_order.Select(p => new
+            //rd1.SetDataSource(db.CustomerOrder().Select(p => new
+            //{
+            //    OrderID = p.o_id,
+            //    CustomerName = p.UserName,
+            //    product = p.ProductName,
+            //    Quantity = p.o_qty
+
+
+
+            //}).ToList());
             Response.Buffer = false;
             Response.ClearContent();
             Response.ClearHeaders();
@@ -66,39 +117,64 @@ namespace WebApplication1.Controllers
                 (CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             stream.Seek(0, SeekOrigin.Begin);
             return File(stream, "application/pdf", "ListOrders.pdf");
+
+
+
+
+
         }
+
+
 
         public ActionResult ProductInfo()
         {
-            ViewBag.ListCustomers = db.Products.ToList();
+            ViewBag.ListProduct = db.ProductReport().ToList();
             return View();
         }
+
         public ActionResult Export2()
         {
-            ReportDocument rd1 = new ReportDocument();
-            rd1.Load(Path.Combine(Server.MapPath("~/Reports/ProductReport.rpt")));
-            rd1.SetDataSource(db.Products.Select(p => new
+
+            ReportDocument rd2 = new ReportDocument();
+            rd2.Load(Path.Combine(Server.MapPath("~/Reports/PRODUCTS.rpt")));
+            //rd1.SetDataSource(db.tbl_order.Select(p => new
+			/*
+            rd2.SetDataSource(db.ProductReport().Select(p => new
             {
                 ProductID = p.ProductID,
                 ProductName = p.ProductName,
                 ProductDescription = p.ProductDescription,
-                ProductPrice = p.ProductPrice,
-                ProdctFK_category = p.ProdctFK_category
+                CategoryName = p.CategoryName,
+                ProductPrice = p.ProductPrice
+
+
+
             }).ToList());
+			*/
             Response.Buffer = false;
             Response.ClearContent();
             Response.ClearHeaders();
-            Stream stream = rd1.ExportToStream
+            Stream stream = rd2.ExportToStream
                 (CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             stream.Seek(0, SeekOrigin.Begin);
-            return File(stream, "application/pdf", "ListProducts.pdf");
+            return File(stream, "application/pdf", "ListProduct.pdf");
+
+
+
+
+
         }
+
+        
+
 
         [HttpGet]
         public ActionResult login()
         {
             return View();
         }
+
+
         [HttpPost]
         public ActionResult login(Admin avm)
         {
@@ -118,6 +194,8 @@ namespace WebApplication1.Controllers
 
             return View();
         }
+
+
         public ActionResult Create()
         {
             if (Session["AdminID"] == null)
@@ -126,6 +204,8 @@ namespace WebApplication1.Controllers
             }
             return View();
         }
+
+
         [HttpPost]
         public ActionResult Create(Category cvm, HttpPostedFileBase imgfile)
         {
@@ -147,7 +227,9 @@ namespace WebApplication1.Controllers
             }
 
             return View();
-        }
+        } //end,,,,,,,,,,,,,,,,,,,
+
+
 
         public ActionResult ViewCategory(int? page)
         {
@@ -159,6 +241,10 @@ namespace WebApplication1.Controllers
 
             return View(stu);
         }
+
+
+
+
         public string uploadimgfile(HttpPostedFileBase file)
         {
             Random r = new Random();
@@ -201,7 +287,6 @@ namespace WebApplication1.Controllers
         }
 
 
-
         [HttpGet]
         public ActionResult AddProduct()
         {
@@ -236,7 +321,7 @@ namespace WebApplication1.Controllers
                 db.Products.Add(p);
                 db.SaveChanges();
                 Response.Redirect("AddProduct");
-
+                
             }
             List<Category> list = db.Categories.ToList();
             ViewBag.categorylist = new SelectList(list, "CategoryID", "CategoryName");
@@ -267,9 +352,10 @@ namespace WebApplication1.Controllers
 
             return View(stu);
         }
+
         public ActionResult Delete(int? id)
         {
-            CartEntities db = new CartEntities();
+            DB17Entities1 db = new DB17Entities1();
             Product p = db.Products.Where(x => x.ProductID == id).SingleOrDefault();
             db.Products.Remove(p);
             db.SaveChanges();
@@ -277,7 +363,7 @@ namespace WebApplication1.Controllers
         }
         public ActionResult DeleteCategory(int? id)
         {
-            CartEntities db = new CartEntities();
+            DB17Entities1 db = new DB17Entities1();
             Category p = db.Categories.Where(x => x.CategoryID == id).SingleOrDefault();
             db.Categories.Remove(p);
             db.SaveChanges();
@@ -285,15 +371,15 @@ namespace WebApplication1.Controllers
         }
         public ActionResult RegisteredCustomers()
         {
-            CartEntities db = new CartEntities();
+            DB17Entities1 db = new DB17Entities1();
 
             List<Customer> list = db.Customers.ToList();
-            List<Customers> viewList = new List<Customers>();
+            List<customers> viewList = new List<customers>();
 
             foreach (Customer obj in db.Customers)
             {
 
-                Customers p = new Customers();
+                customers p = new customers();
                 p.CustomerID = obj.CustomerID;
                 p.UserName = obj.UserName;
                 p.EmailAddress = obj.EmailAddress;
@@ -311,14 +397,15 @@ namespace WebApplication1.Controllers
 
 
             }
-            List<Customers> view = new List<Customers>();
+            List<customers> view = new List<customers>();
             return View(viewList);
 
 
         }
+
         //public ActionResult AllCustomers()
         //{
-        //    CartEntities db = new CartEntities();
+        //    BakerySystemEntities db = new BakerySystemEntities();
 
         //    List<Customer> list = db.Customers.ToList();
         //    List<Customers> viewList = new List<Customers>();
@@ -344,7 +431,7 @@ namespace WebApplication1.Controllers
 
 
         //    }
-
+           
         //    return View(viewList);
 
 
@@ -353,20 +440,34 @@ namespace WebApplication1.Controllers
         public ActionResult DeleteCustomer(int? id)
         {
 
-            CartEntities db = new CartEntities();
-            Customer p = db.Customers.Where(x => x.CustomerID == id).SingleOrDefault();
-            db.Customers.Remove(p);
-            db.SaveChanges();
-            return View("RegisteredCustomers");
-
+            DB17Entities1 db = new DB17Entities1();
+                Customer p = db.Customers.Where(x => x.CustomerID == id).SingleOrDefault();
+                db.Customers.Remove(p);
+                db.SaveChanges();
+                return View("RegisteredCustomers");
+           
 
         }
+
+
+        //public ActionResult DeleteAllCustomer(int? id)
+        //{
+
+        //    BakerySystemEntities db = new BakerySystemEntities();
+        //    Customer p = db.Customers.Where(x => x.CustomerID == id).SingleOrDefault();
+        //    db.Customers.Remove(p);
+        //    db.SaveChanges();
+        //    return View("RegisteredCustomers");
+
+
+        //}
+
         public ActionResult Signout()
         {
             Session.RemoveAll();
             Session.Abandon();
 
-            return RedirectToAction("Index", "User");
+            return RedirectToAction("Index","User");
         }
 
     }

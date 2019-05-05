@@ -285,8 +285,6 @@ namespace WebApplication1.Reports {
             
             private global::System.Data.DataColumn columno_qty;
             
-            private global::System.Data.DataColumn columno_bill;
-            
             private global::System.Data.DataColumn columno_unitprice;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -348,14 +346,6 @@ namespace WebApplication1.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn o_billColumn {
-                get {
-                    return this.columno_bill;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn o_unitpriceColumn {
                 get {
                     return this.columno_unitprice;
@@ -399,13 +389,12 @@ namespace WebApplication1.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public OrderRow AddOrderRow(int o_id, System.DateTime o_date, int o_qty, decimal o_bill, int o_unitprice) {
+            public OrderRow AddOrderRow(int o_id, System.DateTime o_date, int o_qty, int o_unitprice) {
                 OrderRow rowOrderRow = ((OrderRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         o_id,
                         o_date,
                         o_qty,
-                        o_bill,
                         o_unitprice};
                 rowOrderRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowOrderRow);
@@ -439,7 +428,6 @@ namespace WebApplication1.Reports {
                 this.columno_id = base.Columns["o_id"];
                 this.columno_date = base.Columns["o_date"];
                 this.columno_qty = base.Columns["o_qty"];
-                this.columno_bill = base.Columns["o_bill"];
                 this.columno_unitprice = base.Columns["o_unitprice"];
             }
             
@@ -452,14 +440,15 @@ namespace WebApplication1.Reports {
                 base.Columns.Add(this.columno_date);
                 this.columno_qty = new global::System.Data.DataColumn("o_qty", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columno_qty);
-                this.columno_bill = new global::System.Data.DataColumn("o_bill", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columno_bill);
                 this.columno_unitprice = new global::System.Data.DataColumn("o_unitprice", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columno_unitprice);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columno_id}, true));
                 this.columno_id.AllowDBNull = false;
                 this.columno_id.Unique = true;
+                this.columno_date.AllowDBNull = false;
+                this.columno_qty.AllowDBNull = false;
+                this.columno_unitprice.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -615,12 +604,7 @@ namespace WebApplication1.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public System.DateTime o_date {
                 get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableOrder.o_dateColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'o_date\' in table \'Order\' is DBNull.", e);
-                    }
+                    return ((global::System.DateTime)(this[this.tableOrder.o_dateColumn]));
                 }
                 set {
                     this[this.tableOrder.o_dateColumn] = value;
@@ -631,12 +615,7 @@ namespace WebApplication1.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public int o_qty {
                 get {
-                    try {
-                        return ((int)(this[this.tableOrder.o_qtyColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'o_qty\' in table \'Order\' is DBNull.", e);
-                    }
+                    return ((int)(this[this.tableOrder.o_qtyColumn]));
                 }
                 set {
                     this[this.tableOrder.o_qtyColumn] = value;
@@ -645,82 +624,13 @@ namespace WebApplication1.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal o_bill {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableOrder.o_billColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'o_bill\' in table \'Order\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableOrder.o_billColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public int o_unitprice {
                 get {
-                    try {
-                        return ((int)(this[this.tableOrder.o_unitpriceColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'o_unitprice\' in table \'Order\' is DBNull.", e);
-                    }
+                    return ((int)(this[this.tableOrder.o_unitpriceColumn]));
                 }
                 set {
                     this[this.tableOrder.o_unitpriceColumn] = value;
                 }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Iso_dateNull() {
-                return this.IsNull(this.tableOrder.o_dateColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Seto_dateNull() {
-                this[this.tableOrder.o_dateColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Iso_qtyNull() {
-                return this.IsNull(this.tableOrder.o_qtyColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Seto_qtyNull() {
-                this[this.tableOrder.o_qtyColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Iso_billNull() {
-                return this.IsNull(this.tableOrder.o_billColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Seto_billNull() {
-                this[this.tableOrder.o_billColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Iso_unitpriceNull() {
-                return this.IsNull(this.tableOrder.o_unitpriceColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Seto_unitpriceNull() {
-                this[this.tableOrder.o_unitpriceColumn] = global::System.Convert.DBNull;
             }
         }
         

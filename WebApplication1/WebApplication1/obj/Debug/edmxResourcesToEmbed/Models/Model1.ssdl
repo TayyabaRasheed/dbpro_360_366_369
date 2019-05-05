@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="CartModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="DB17Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Admin">
     <Key>
       <PropertyRef Name="AdminID" />
@@ -38,6 +38,7 @@
     <Property Name="DateOfBirth" Type="datetime" />
     <Property Name="ContactNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="UserImage" Type="nvarchar(max)" />
+    <Property Name="Added On" Type="datetime" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
@@ -66,7 +67,7 @@
     </Key>
     <Property Name="in_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="in_fk_Customer" Type="int" />
-    <Property Name="in_date" Type="datetime" />
+    <Property Name="in_date" Type="datetime" Nullable="false" />
     <Property Name="in_totalbill" Type="float" />
   </EntityType>
   <EntityType Name="tbl_order">
@@ -76,7 +77,7 @@
     <Property Name="o_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="o_fk_Product" Type="int" />
     <Property Name="o_fk_invoice" Type="int" />
-    <Property Name="o_date" Type="datetime" />
+    <Property Name="o_date" Type="datetime" Nullable="false" />
     <Property Name="o_qty" Type="int" />
     <Property Name="o_bill" Type="float" />
     <Property Name="o_unitprice" Type="int" />
@@ -213,7 +214,9 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="CartModelStoreContainer">
+  <Function Name="CustomerOrder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ProductReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="DB17ModelStoreContainer">
     <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CartReport" EntityType="Self.CartReport" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
