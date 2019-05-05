@@ -87,6 +87,20 @@
           <Property Name="o_bill" Type="float" />
           <Property Name="o_unitprice" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB17.dbo.dailyrecord' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="dailyrecord">
+          <Key>
+            <PropertyRef Name="o_id" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="ProductName" />
+          </Key>
+          <Property Name="o_id" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="o_qty" Type="int" />
+          <Property Name="orderdate" Type="date" />
+        </EntityType>
         <Association Name="FK__Category__Catego__21B6055D">
           <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
           <End Role="Category" Type="Self.Category" Multiplicity="*" />
@@ -220,6 +234,9 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="CustomerOrder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="DailyReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="date" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="ProductReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="DB17ModelStoreContainer">
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
@@ -230,6 +247,15 @@
           <EntitySet Name="Report1" EntityType="Self.Report1" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_invoice" EntityType="Self.tbl_invoice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_order" EntityType="Self.tbl_order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dailyrecord" EntityType="Self.dailyrecord" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[dailyrecord].[o_id] AS [o_id], 
+[dailyrecord].[UserName] AS [UserName], 
+[dailyrecord].[ProductName] AS [ProductName], 
+[dailyrecord].[o_qty] AS [o_qty], 
+[dailyrecord].[orderdate] AS [orderdate]
+FROM [dbo].[dailyrecord] AS [dailyrecord]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__Category__Catego__21B6055D" Association="Self.FK__Category__Catego__21B6055D">
             <End Role="Admin" EntitySet="Admin" />
             <End Role="Category" EntitySet="Category" />
@@ -384,6 +410,18 @@
           <NavigationProperty Name="tbl_invoice1" Relationship="Self.FK__tbl_order__o_fk___29572725" FromRole="tbl_order" ToRole="tbl_invoice" />
           <NavigationProperty Name="tbl_invoice2" Relationship="Self.FK__tbl_order__o_fk___2B3F6F97" FromRole="tbl_order" ToRole="tbl_invoice" />
         </EntityType>
+        <EntityType Name="dailyrecord">
+          <Key>
+            <PropertyRef Name="o_id" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="ProductName" />
+          </Key>
+          <Property Name="o_id" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="o_qty" Type="Int32" />
+          <Property Name="orderdate" Type="DateTime" Precision="0" />
+        </EntityType>
         <Association Name="FK__Category__Catego__21B6055D">
           <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
           <End Role="Category" Type="Self.Category" Multiplicity="*" />
@@ -525,6 +563,7 @@
           <EntitySet Name="Report1" EntityType="Self.Report1" />
           <EntitySet Name="tbl_invoice" EntityType="Self.tbl_invoice" />
           <EntitySet Name="tbl_order" EntityType="Self.tbl_order" />
+          <EntitySet Name="dailyrecords" EntityType="Self.dailyrecord" />
           <AssociationSet Name="FK__Category__Catego__21B6055D" Association="Self.FK__Category__Catego__21B6055D">
             <End Role="Admin" EntitySet="Admins" />
             <End Role="Category" EntitySet="Categories" />
@@ -570,6 +609,9 @@
             <End Role="tbl_order" EntitySet="tbl_order" />
           </AssociationSet>
           <FunctionImport Name="CustomerOrder" ReturnType="Collection(DB17Model.CustomerOrder_Result)" />
+          <FunctionImport Name="DailyReport" ReturnType="Collection(DB17Model.DailyReport_Result)">
+            <Parameter Name="date" Mode="In" Type="DateTime" />
+          </FunctionImport>
           <FunctionImport Name="ProductReport" ReturnType="Collection(DB17Model.ProductReport_Result)" />
         </EntityContainer>
         <ComplexType Name="CustomerOrder_Result">
@@ -577,6 +619,14 @@
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="ProductName" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="o_qty" Nullable="true" />
+          <Property Type="DateTime" Name="orderdate" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="DailyReport_Result">
+          <Property Type="Int32" Name="o_id" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ProductName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="o_qty" Nullable="true" />
+          <Property Type="DateTime" Name="orderdate" Nullable="true" />
         </ComplexType>
         <ComplexType Name="ProductReport_Result">
           <Property Type="Int32" Name="ProductID" Nullable="false" />
@@ -681,6 +731,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="dailyrecords">
+            <EntityTypeMapping TypeName="DB17Model.dailyrecord">
+              <MappingFragment StoreEntitySet="dailyrecord">
+                <ScalarProperty Name="o_id" ColumnName="o_id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="o_qty" ColumnName="o_qty" />
+                <ScalarProperty Name="orderdate" ColumnName="orderdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="CustomerOrder" FunctionName="DB17Model.Store.CustomerOrder">
             <ResultMapping>
               <ComplexTypeMapping TypeName="DB17Model.CustomerOrder_Result">
@@ -688,6 +749,18 @@
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="o_qty" ColumnName="o_qty" />
+                <ScalarProperty Name="orderdate" ColumnName="orderdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DailyReport" FunctionName="DB17Model.Store.DailyReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB17Model.DailyReport_Result">
+                <ScalarProperty Name="o_id" ColumnName="o_id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="o_qty" ColumnName="o_qty" />
+                <ScalarProperty Name="orderdate" ColumnName="orderdate" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

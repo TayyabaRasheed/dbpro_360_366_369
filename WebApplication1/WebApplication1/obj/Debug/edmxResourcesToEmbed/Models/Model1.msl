@@ -91,6 +91,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="dailyrecords">
+      <EntityTypeMapping TypeName="DB17Model.dailyrecord">
+        <MappingFragment StoreEntitySet="dailyrecord">
+          <ScalarProperty Name="o_id" ColumnName="o_id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="o_qty" ColumnName="o_qty" />
+          <ScalarProperty Name="orderdate" ColumnName="orderdate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="CustomerOrder" FunctionName="DB17Model.Store.CustomerOrder">
       <ResultMapping>
         <ComplexTypeMapping TypeName="DB17Model.CustomerOrder_Result">
@@ -98,6 +109,18 @@
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="ProductName" ColumnName="ProductName" />
           <ScalarProperty Name="o_qty" ColumnName="o_qty" />
+          <ScalarProperty Name="orderdate" ColumnName="orderdate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="DailyReport" FunctionName="DB17Model.Store.DailyReport">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DB17Model.DailyReport_Result">
+          <ScalarProperty Name="o_id" ColumnName="o_id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="o_qty" ColumnName="o_qty" />
+          <ScalarProperty Name="orderdate" ColumnName="orderdate" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e6852ebfadee4ea69542dc355d6e4db6" Name="Diagram1">
+      <Diagram DiagramId="245183b429f94c2f96ec2c2a95e3571c" Name="Diagram1">
         <EntityTypeShape EntityType="DB17Model.Admin" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DB17Model.CartReport" Width="1.5" PointX="2.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DB17Model.Category" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
@@ -13,6 +13,7 @@
         <EntityTypeShape EntityType="DB17Model.Report1" Width="1.5" PointX="4.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DB17Model.tbl_invoice" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DB17Model.tbl_order" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB17Model.dailyrecord" Width="1.5" PointX="6.75" PointY="1.375" IsExpanded="true" />
         <AssociationConnector Association="DB17Model.FK__Category__Catego__21B6055D" ManuallyRouted="false" />
         <AssociationConnector Association="DB17Model.FK__Product__ProdctF__22AA2996" ManuallyRouted="false" />
         <AssociationConnector Association="DB17Model.FK__Product__ProdctF__24927208" ManuallyRouted="false" />

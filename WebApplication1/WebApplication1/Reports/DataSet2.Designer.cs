@@ -287,6 +287,8 @@ namespace WebApplication1.Reports {
             
             private global::System.Data.DataColumn columnQuantity;
             
+            private global::System.Data.DataColumn columnOrderDate;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public CustomerORderDataTable() {
@@ -354,6 +356,14 @@ namespace WebApplication1.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn OrderDateColumn {
+                get {
+                    return this.columnOrderDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -389,13 +399,14 @@ namespace WebApplication1.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public CustomerORderRow AddCustomerORderRow(int OrderID, string CustomerName, string ProductName, int Quantity) {
+            public CustomerORderRow AddCustomerORderRow(int OrderID, string CustomerName, string ProductName, int Quantity, System.DateTime OrderDate) {
                 CustomerORderRow rowCustomerORderRow = ((CustomerORderRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         OrderID,
                         CustomerName,
                         ProductName,
-                        Quantity};
+                        Quantity,
+                        OrderDate};
                 rowCustomerORderRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowCustomerORderRow);
                 return rowCustomerORderRow;
@@ -429,6 +440,7 @@ namespace WebApplication1.Reports {
                 this.columnCustomerName = base.Columns["CustomerName"];
                 this.columnProductName = base.Columns["ProductName"];
                 this.columnQuantity = base.Columns["Quantity"];
+                this.columnOrderDate = base.Columns["OrderDate"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -442,11 +454,16 @@ namespace WebApplication1.Reports {
                 base.Columns.Add(this.columnProductName);
                 this.columnQuantity = new global::System.Data.DataColumn("Quantity", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnQuantity);
+                this.columnOrderDate = new global::System.Data.DataColumn("OrderDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOrderDate);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnOrderID}, true));
                 this.columnOrderID.AllowDBNull = false;
                 this.columnOrderID.Unique = true;
                 this.columnCustomerName.AllowDBNull = false;
+                this.columnProductName.AllowDBNull = false;
+                this.columnQuantity.AllowDBNull = false;
+                this.columnOrderDate.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -613,12 +630,7 @@ namespace WebApplication1.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string ProductName {
                 get {
-                    try {
-                        return ((string)(this[this.tableCustomerORder.ProductNameColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ProductName\' in table \'CustomerORder\' is DBNull.", e);
-                    }
+                    return ((string)(this[this.tableCustomerORder.ProductNameColumn]));
                 }
                 set {
                     this[this.tableCustomerORder.ProductNameColumn] = value;
@@ -629,12 +641,7 @@ namespace WebApplication1.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public int Quantity {
                 get {
-                    try {
-                        return ((int)(this[this.tableCustomerORder.QuantityColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Quantity\' in table \'CustomerORder\' is DBNull.", e);
-                    }
+                    return ((int)(this[this.tableCustomerORder.QuantityColumn]));
                 }
                 set {
                     this[this.tableCustomerORder.QuantityColumn] = value;
@@ -643,26 +650,13 @@ namespace WebApplication1.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsProductNameNull() {
-                return this.IsNull(this.tableCustomerORder.ProductNameColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetProductNameNull() {
-                this[this.tableCustomerORder.ProductNameColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsQuantityNull() {
-                return this.IsNull(this.tableCustomerORder.QuantityColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetQuantityNull() {
-                this[this.tableCustomerORder.QuantityColumn] = global::System.Convert.DBNull;
+            public System.DateTime OrderDate {
+                get {
+                    return ((global::System.DateTime)(this[this.tableCustomerORder.OrderDateColumn]));
+                }
+                set {
+                    this[this.tableCustomerORder.OrderDateColumn] = value;
+                }
             }
         }
         

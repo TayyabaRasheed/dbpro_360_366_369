@@ -36,10 +36,20 @@ namespace WebApplication1.Models
         public DbSet<Report1> Report1 { get; set; }
         public DbSet<tbl_invoice> tbl_invoice { get; set; }
         public DbSet<tbl_order> tbl_order { get; set; }
+        public DbSet<dailyrecord> dailyrecords { get; set; }
     
         public virtual ObjectResult<CustomerOrder_Result> CustomerOrder()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CustomerOrder_Result>("CustomerOrder");
+        }
+    
+        public virtual ObjectResult<DailyReport_Result> DailyReport(Nullable<System.DateTime> date)
+        {
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("date", date) :
+                new ObjectParameter("date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DailyReport_Result>("DailyReport", dateParameter);
         }
     
         public virtual ObjectResult<ProductReport_Result> ProductReport()

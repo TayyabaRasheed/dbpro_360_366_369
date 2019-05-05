@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "ListOrder";
+    ViewBag.Title = "ListReport";
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
 
@@ -9,7 +9,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>OrderInfo</title>
+    <title>DailySale</title>
 </head>
 <body>
     <h3>List Orders</h3>
@@ -20,24 +20,24 @@
             <th>product</th>
             <th>Quantity</th>
             <th>OrderDate</th>
-           
-           
+
+
         </tr>
-        @foreach (var p in ViewBag.ListOrder)
+        @foreach (var p in ViewBag.ListReport)
         {
             <tr>
                 <td>@p.o_id</td>
                 <td>@p.UserName</td>
                 <td>@p.ProductName</td>
-               
+
                 <td>@p.o_qty</td>
                 <td>@p.orderdate</td>
-                
+
             </tr>
 
         }
     </table>
     <br /><br />
-    <a href="@Url.Action("Export1","Admin")">Export Report</a>
+    <a href="@Url.Action("Export5","Admin")">Export Report</a>
 </body>
 </html>

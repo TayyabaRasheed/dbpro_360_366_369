@@ -50,6 +50,7 @@ namespace WebApplication1.Controllers
                     u.UserImage = path;
                     u.ContactNumber = uvm.ContactNumber;
                     u.Added_On = System.DateTime.Now;
+                    
                     db.Customers.Add(u);
                     db.SaveChanges();
                     return RedirectToAction("login");

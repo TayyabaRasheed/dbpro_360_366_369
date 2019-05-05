@@ -5,7 +5,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
-using WebApplication1.Reports;
 using PagedList;
 using CrystalDecisions.CrystalReports.Engine;
 
@@ -98,18 +97,18 @@ namespace WebApplication1.Controllers
         {
 
             ReportDocument rd1 = new ReportDocument();
-            rd1.Load(Path.Combine(Server.MapPath("~/Reports/REPORT.rpt")));
-            //rd1.SetDataSource(db.tbl_order.Select(p => new
-            //rd1.SetDataSource(db.CustomerOrder().Select(p => new
-            //{
-            //    OrderID = p.o_id,
-            //    CustomerName = p.UserName,
-            //    product = p.ProductName,
-            //    Quantity = p.o_qty
+            rd1.Load(Path.Combine(Server.MapPath("~/Reports/CustomerReport1.rpt")));
+
+            rd1.SetDataSource(db.CustomerOrder().Select(p => new
+            {
+                OrderID = p.o_id,
+                CustomerName = p.UserName,
+                product = p.ProductName,
+                Quantity = p.o_qty,
+                OrderDate = p.orderdate
 
 
-
-            //}).ToList());
+            }).ToList());
             Response.Buffer = false;
             Response.ClearContent();
             Response.ClearHeaders();
@@ -123,6 +122,50 @@ namespace WebApplication1.Controllers
 
 
         }
+
+
+
+        public ActionResult DailySale()
+        {
+            ViewBag.ListReport = db.DailyReport(System.DateTime.Now).ToList();
+            return View();
+        }
+
+        public ActionResult Export5()
+        {
+
+            ReportDocument rd1 = new ReportDocument();
+            rd1.Load(Path.Combine(Server.MapPath("~/Reports/DailySaleReport.rpt")));
+
+            rd1.SetDataSource(db.DailyReport(System.DateTime.Now).Select(p => new
+            {
+                OrderID = p.o_id,
+                CustomerName = p.UserName,
+                product = p.ProductName,
+                Quantity = p.o_qty,
+                OrderDate = p.orderdate
+
+
+            }).ToList());
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+            Stream stream = rd1.ExportToStream
+                (CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "ListReport.pdf");
+
+
+
+
+
+        }
+
+
+
+
+
+
 
 
 

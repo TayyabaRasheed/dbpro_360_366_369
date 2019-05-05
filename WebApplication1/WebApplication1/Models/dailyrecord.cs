@@ -10,8 +10,9 @@
 namespace WebApplication1.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class CustomerOrder_Result
+    public partial class dailyrecord
     {
         public int o_id { get; set; }
         public string UserName { get; set; }

@@ -11,7 +11,7 @@ namespace WebApplication1.Models
 {
     using System;
     
-    public partial class CustomerOrder_Result
+    public partial class DailyReport_Result
     {
         public int o_id { get; set; }
         public string UserName { get; set; }
